@@ -12,7 +12,7 @@ void fsm_init(void) {
     fsm_context.aoa_limit_low = 0.0f;
     fsm_context.aoa_limit_high = 20.0f;
 }
-
+//THRESHOLD LOOKUP
 void fsm_set_thresholds(const char *aircraft_type, const char *flight_mode) {
     float low = 0, high = 0;
     if (thresholds_lookup(aircraft_type, flight_mode, &low, &high)) {
@@ -24,7 +24,7 @@ void fsm_set_thresholds(const char *aircraft_type, const char *flight_mode) {
 }
 
 fsm_context_t *fsm_get_context(void) { return &fsm_context; }
-
+// FSM compares the calculated AOA against boundaries
 fsm_output_t fsm_run(float calculated_aoa) {
     fsm_output_t out = {0};
     out.aoa_value = calculated_aoa;
@@ -57,9 +57,10 @@ fsm_output_t fsm_run(float calculated_aoa) {
         default:
             strncpy(out.status_str, "UNKNOWN", sizeof(out.status_str)-1); out.led_on = false; break;
     }
-
+    //logging 
     ESP_LOGD(TAG, "FSM: %s aoa=%.2f limit=%.2f", out.status_str, calculated_aoa, limit_high);
     // At the end of fsm_run() before the return statement:
+    //FSM state and passes it to elevator_apply_cmd()
 elevator_apply_cmd(out.state, calculated_aoa, limit_high);
     return out;
 }

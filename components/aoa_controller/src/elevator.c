@@ -59,7 +59,7 @@ void elevator_tick(uint32_t dt_ms) {
         }
     }
 
-    // TODO: In a real system, send current_deflection_deg to PWM hardware driver here
+    //In a real system, send current_deflection_deg to PWM hardware driver here
 }
 
 float elevator_get_current_deflection(void) {

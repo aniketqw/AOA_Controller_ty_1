@@ -30,5 +30,8 @@ sensor_data_t *hal_get_sensor_data(void);
 void hal_lock_sensor_data(void);
 void hal_unlock_sensor_data(void);
 void hal_input_task(void *pvParameters);
+int parse_aoa_message(const char *line);
+int parse_flight_params_message(const char *line);
+int parse_flight_mode_message(const char *line);
 
 #endif

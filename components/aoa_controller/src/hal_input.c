@@ -29,7 +29,7 @@ sensor_data_t *hal_get_sensor_data(void) { return &sensor_data; }
 void hal_lock_sensor_data(void) { xSemaphoreTake(sensor_data.buffer_mutex, portMAX_DELAY); }
 void hal_unlock_sensor_data(void) { xSemaphoreGive(sensor_data.buffer_mutex); }
 
-static int parse_aoa_message(const char *line) {
+int parse_aoa_message(const char *line) {
     if (strncmp(line, "$AOA,", 5) != 0) return -1;
     float s1, s2, s3; uint32_t ts;
     if (sscanf(line, "$AOA,S1=%f,S2=%f,S3=%f,TS=%lu*", &s1, &s2, &s3, &ts) != 4) return -1;
@@ -45,7 +45,7 @@ static int parse_aoa_message(const char *line) {
     return 0;
 }
 
-static int parse_flight_params_message(const char *line) {
+int parse_flight_params_message(const char *line) {
     if (strncmp(line, "$FLIGHT_PARAMS,", 15) != 0) return -1;
     float airspeed; uint32_t ts;
     if (sscanf(line, "$FLIGHT_PARAMS,AIRSPEED=%f,TS=%lu*", &airspeed, &ts) != 2) return -1;
@@ -55,7 +55,7 @@ static int parse_flight_params_message(const char *line) {
     return 0;
 }
 
-static int parse_flight_mode_message(const char *line) {
+int parse_flight_mode_message(const char *line) {
     if (strncmp(line, "$FLIGHT_MODE,", 13) != 0) return -1;
     char mode_str[32]; uint32_t ts;
     if (sscanf(line, "$FLIGHT_MODE,MODE=%31[^,],TS=%lu*", mode_str, &ts) != 2) return -1;
