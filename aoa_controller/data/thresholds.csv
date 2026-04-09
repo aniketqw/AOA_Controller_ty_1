@@ -1,0 +1,10 @@
+# aircraft_type,flight_mode,aoa_low,aoa_high
+Aircraft_A,TAKEOFF,0.0,18.0
+Aircraft_A,CLIMB,5.0,20.0
+Aircraft_A,CRUISE,3.0,22.0
+Aircraft_A,LANDING,2.0,20.0
+
+Aircraft_B,TAKEOFF,2.0,16.0
+Aircraft_B,CLIMB,4.0,18.0
+Aircraft_B,CRUISE,2.0,20.0
+Aircraft_B,LANDING,1.0,18.0
