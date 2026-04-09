@@ -1,0 +1,4 @@
+build/
+build/.ninja_deps
+build/.ninja_log
+build/log/idf_py_stdout_output_385
